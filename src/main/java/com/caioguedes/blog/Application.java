@@ -1,5 +1,7 @@
-import controllers.Index;
-import controllers.Post;
+package com.caioguedes.blog;
+
+import com.caioguedes.blog.controllers.Index;
+import com.caioguedes.blog.controllers.Post;
 
 import spark.Spark;
 

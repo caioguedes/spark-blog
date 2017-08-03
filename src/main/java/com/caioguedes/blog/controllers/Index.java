@@ -1,6 +1,6 @@
-package controllers;
+package com.caioguedes.blog.controllers;
 
-import models.Post;
+import com.caioguedes.blog.models.Post;
 import spark.ModelAndView;
 import spark.Response;
 import spark.Request;
