@@ -1,0 +1,16 @@
+
+{{#partial "content"}}
+    {{#each posts}}
+        <article>
+            <header>
+                <h1><a href="#">{{ title }}</a></h1>
+            </header>
+            <section>
+                {{{ body }}}
+            </section>
+        </article>
+    {{/each}}
+
+{{/partial}}
+
+{{> "layout/default.hbs"}}
