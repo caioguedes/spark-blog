@@ -4,16 +4,12 @@ import models.Post;
 import spark.ModelAndView;
 import spark.Response;
 import spark.Request;
-import spark.TemplateEngine;
-import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Index {
-
-    private TemplateEngine template = new HandlebarsTemplateEngine();
+public class Index extends Controller {
 
     public String get(Request request, Response response) {
         Map<String, Object> data = new HashMap<>();
@@ -32,6 +28,6 @@ public class Index {
 
         data.put("posts", posts);
 
-        return this.template.render(new ModelAndView(data, "index.hbs"));
+        return template.render(new ModelAndView(data, "index.hbs"));
     }
 }
