@@ -1,15 +1,19 @@
 {{#partial "content"}}
-    {{#post}}
-    <article>
-        <header>
-            <h1>{{ title }}</h1>
-        </header>
-        <hr>
-        <section>
-            {{{ body }}}
-        </section>
-    </article>
-    {{/post}}
+    {{#if post}}
+        {{#post}}
+            <article>
+                <header>
+                    <h1>{{ title }}</h1>
+                </header>
+                <hr>
+                <section>
+                    {{{ body }}}
+                </section>
+            </article>
+        {{/post}}
+    {{else}}
+        <h1>Ops! What you are looking for does't exists...</h1>
+    {{/if}}
 
 {{/partial}}
 
