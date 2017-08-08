@@ -1,0 +1,25 @@
+{{#partial "content"}}
+    <h1>Create a new post</h1>
+
+    {{#if message}}
+        <div class="alert alert-success" role="alert">{{ message }}</div>
+    {{/if}}
+    <form action="/posts" method="post">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+
+        <div class="form-group">
+            <label for="body">Body</label>
+            <textarea name="body" class="form-control" id="body" cols="30" rows="10"></textarea>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
+
+{{/partial}}
+
+{{> "layout/default.hbs"}}

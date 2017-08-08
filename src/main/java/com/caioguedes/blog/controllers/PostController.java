@@ -28,4 +28,22 @@ public class PostController extends BaseController {
 
         return template.render(new ModelAndView(data, "posts/view.hbs"));
     }
+
+    public String create(Request request, Response response) {
+        Map<String, Object> data = new HashMap<>();
+        return template.render(new ModelAndView(data, "posts/create.hbs"));
+    }
+
+    public String post(Request request, Response response) {
+        Map<String, Object> data = new HashMap<>();
+
+        Post post = new Post();
+        post.setTitle(request.queryParams("title"));
+        post.setBody(request.queryParams("body"));
+
+        this.postDao.save(post);
+
+        data.put("message", "Post created!");
+        return template.render(new ModelAndView(data, "posts/create.hbs"));
+    }
 }

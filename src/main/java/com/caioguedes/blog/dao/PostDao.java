@@ -13,11 +13,10 @@ import java.util.List;
 public class PostDao {
 
     public Post get(int id) {
-        try {
+        try (
             Connection connection = new ConnectionFactory().getConnection();
-            PreparedStatement statement = connection.prepareStatement(
-                "select * from posts where id = ?"
-            );
+            PreparedStatement statement = connection.prepareStatement("select * from posts where id = ?")
+        ) {
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
 
@@ -33,10 +32,6 @@ public class PostDao {
                 setBody(result.getString("body"));
             }};
 
-            result.close();
-            statement.close();
-            connection.close();
-
             return post;
 
         } catch (SQLException exception) {
@@ -45,11 +40,12 @@ public class PostDao {
     }
 
     public List<Post> all() {
-        try {
+        String query = "select * from posts";
+
+        try (
             Connection connection = new ConnectionFactory().getConnection();
-            PreparedStatement statement = connection.prepareStatement(
-                "select * from posts"
-            );
+            PreparedStatement statement = connection.prepareStatement(query)
+        ) {
             ResultSet result = statement.executeQuery();
 
             if (!result.isBeforeFirst()) {
@@ -65,14 +61,35 @@ public class PostDao {
                 }});
             }
 
-            result.close();
-            statement.close();
-            connection.close();
-
             return posts;
 
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            exception.printStackTrace();
         }
+
+        return new ArrayList<Post>();
+    }
+
+    public boolean save(Post post) {
+        String query = "insert into posts values (?, ?, ?);";
+
+        try (
+            Connection connection = new ConnectionFactory().getConnection();
+            PreparedStatement statement = connection.prepareStatement(query)
+        ) {
+
+            statement.setInt(1, post.getId());
+            statement.setString(2, post.getTitle());
+            statement.setString(3, post.getBody());
+
+            statement.execute();
+
+            return true;
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return false;
     }
 }

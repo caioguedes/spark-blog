@@ -16,6 +16,8 @@ public class Application {
         }
 
         Spark.get("/", (request, response) -> new IndexController(new PostDao()).get(request, response));
-        Spark.get("/posts/:id", ((request, response) -> new PostController(new PostDao()).view(request, response)));
+        Spark.get("/posts/create", (request, response) -> new PostController(new PostDao()).create(request, response));
+        Spark.get("/posts/:id", (request, response) -> new PostController(new PostDao()).view(request, response));
+        Spark.post("/posts", (request, response) -> new PostController(new PostDao()).post(request, response));
     }
 }
