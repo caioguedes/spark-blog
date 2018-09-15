@@ -71,21 +71,18 @@ public class PostDao {
     }
 
     public boolean save(Post post) {
-        String query = "insert into posts values (?, ?, ?);";
+        String query = "insert into posts (title, body) values (?, ?);";
 
         try (
             Connection connection = new ConnectionFactory().getConnection();
             PreparedStatement statement = connection.prepareStatement(query)
         ) {
-
-            statement.setInt(1, post.getId());
-            statement.setString(2, post.getTitle());
-            statement.setString(3, post.getBody());
+            statement.setString(1, post.getTitle());
+            statement.setString(2, post.getBody());
 
             statement.execute();
 
             return true;
-
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
